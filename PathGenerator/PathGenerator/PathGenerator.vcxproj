@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>H:\Documents\cours\2022_2023\c\OpenGL\PathGenerator\PathGenerator\PathGenerator\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>H:\Documents\cours\2022_2023\c\OpenGL\PathGenerator\PathGenerator\PathGenerator\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Developpement\OpenGL\PathFinder\PathGenerator\PathGenerator\PathGenerator\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Developpement\OpenGL\PathFinder\PathGenerator\PathGenerator\PathGenerator\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

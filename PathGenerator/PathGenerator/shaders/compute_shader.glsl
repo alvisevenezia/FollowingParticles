@@ -17,7 +17,6 @@ layout(std430,binding = 2)buffer mapBuffer{
 	float map[];
 };
 
-uniform float frameRate = 1.0f;
 uniform float seed,offsetAngle;
 uniform int WIDTH,HEIGHT,snifSize,snifRange;
 
@@ -33,7 +32,7 @@ int outOfBound(int x,int bound){
 
 //generate a random number
 float random(){
-	localSeed = (localSeed<<4) ^ localSeed;
+	localSeed = (localSeed<<13) ^ localSeed;
 	float rand = (1.0f - ((localSeed * (localSeed * localSeed * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0f);
 	return rand;
 }
@@ -83,13 +82,11 @@ float snif(int id,float angle){
 	//the third zone
 	float zone3 = snifZone(coord+ivec2(snifRange*cos(angle-offsetAngle),snifRange*sin(angle-offsetAngle)));
 	
-	//have a 1% chance to return a random angle
-	if(random()<0.01f)return randomAngle();
-	
 	//return the angle of the most populated zone
-	if(zone1>zone2 && zone1>zone3)return angle+offsetAngle;
 	if(zone3>zone1 && zone3>zone2)return angle-offsetAngle;
+	if(zone1>zone2 && zone1>zone3)return angle+offsetAngle;
 	return angle;
+
 	
 }
 
@@ -108,14 +105,13 @@ void main(){
 	
 	//find the angle to the most populated zone
 	float newAngle = snif(id,angle);
-	
-	//float newAngle = angle;
 
 	//make the particule move
 	coord.x = coord.x + cos(newAngle);
 	coord.y = coord.y + sin(newAngle);
 	
 	//if particule goes ouside make it bounce
+
 	if(coord.y<=0 || coord.y>=HEIGHT){
 		
 		newAngle = 2*PI - newAngle;

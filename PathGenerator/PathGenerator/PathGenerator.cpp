@@ -7,9 +7,9 @@
 #include <ctime>
 #include "shader.h"
 
-#define WIDTH 1500
-#define HEIGHT 950
-#define FRAME_RATE 60
+#define WIDTH 1920
+#define HEIGHT 1080
+#define FRAME_RATE 120
 #define NUMBER 1024*1024
 #define WORK_GROUP_SIZE 1024
 
@@ -59,6 +59,10 @@ void processInput(GLFWwindow* window) {
 
 }
 
+
+
+
+
 int main()
 {
 
@@ -90,9 +94,7 @@ int main()
     Shader shaderProgram("./shaders/basic_vertex_shader.glsl", "./shaders/fragment_shader.glsl");
     Shader computeProgram("./shaders/compute_shader.glsl");
     Shader decayShader("./shaders/map_update_shader.glsl");
-
-    //655360
-    //16384000
+	
     int workGroup = NUMBER/WORK_GROUP_SIZE;
     printf("%d\n", workGroup);
     
@@ -112,7 +114,6 @@ int main()
         float x = float(rand() % WIDTH);
         float y = float(rand() % HEIGHT);
 
-
         while (powf(x - (WIDTH / 2), 2.0f) + powf(y - (HEIGHT / 2), 2.0f) > powf(radius, 2.0f) || (x == WIDTH/2 || y == HEIGHT/2)) {
             x = float(rand() % WIDTH);
             y = float(rand() % HEIGHT);
@@ -121,8 +122,8 @@ int main()
         particles[i * 3] = x;
         particles[i * 3 + 1] = y;
 
-        //set angle to go toward center
-		float angle = atan2f((HEIGHT / 2) - y, (WIDTH / 2) - x);
+        //generate random angle betwenn 0 and 2pi
+		float angle = float(rand() % 628) / 100.0f;
 		
 		particles[i * 3 + 2] = angle;
 
@@ -146,13 +147,13 @@ int main()
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, NUMBER *3* sizeof(float), particles, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, NUMBER *3* sizeof(float), particles, GL_DYNAMIC_COPY);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, VBO);
 
     
     glGenBuffers(1, &mapBuffer);
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, mapBuffer);
-    glBufferData(GL_SHADER_STORAGE_BUFFER, WIDTH * HEIGHT * sizeof(float), map, GL_DYNAMIC_DRAW);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, WIDTH * HEIGHT * sizeof(float), map, GL_DYNAMIC_COPY);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, mapBuffer);
 
     glEnableVertexAttribArray(0);
@@ -167,9 +168,11 @@ int main()
     computeProgram.use();
 	//set the offset angle of compute shader to 30 degree in radian
 	computeProgram.setFloat("offsetAngle", 0.523599f);
-    computeProgram.setInt("snifSize", 2);
+    computeProgram.setInt("snifSize", 3);
     computeProgram.setInt("snifRange",4);
     computeProgram.setFloat("seed", rand());
+    computeProgram.setInt("WIDTH", WIDTH);
+    computeProgram.setInt("HEIGHT", HEIGHT);
 
     //render loop
     while (!glfwWindowShouldClose(window)) {
@@ -185,7 +188,7 @@ int main()
             glClear(GL_COLOR_BUFFER_BIT);
 
             shaderProgram.use();
-            shaderProgram.setInt("WIDTH",WIDTH);
+            shaderProgram.setInt("WIDTH", WIDTH);
             shaderProgram.setInt("HEIGHT", HEIGHT);
 
             glBindVertexArray(VAO);
@@ -194,10 +197,8 @@ int main()
             glfwSwapBuffers(window);
 
             computeProgram.use();
-            computeProgram.setFloat("frameRate", FRAME_RATE);
             computeProgram.setInt("WIDTH", WIDTH);
             computeProgram.setInt("HEIGHT", HEIGHT);
-
             glBindVertexArray(VAO);
             glDispatchCompute(workGroup, 1, 1);
 
