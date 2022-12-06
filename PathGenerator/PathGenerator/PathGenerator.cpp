@@ -6,12 +6,20 @@
 #include <chrono>
 #include <ctime>
 #include "shader.h"
+#include "track.h"
 
 #define WIDTH 1920
 #define HEIGHT 1080
 #define FRAME_RATE 120
 #define NUMBER 1024*1024
 #define WORK_GROUP_SIZE 1024
+
+enum {
+
+    random,
+    mididle_in_circle,
+    mididle_in_square
+};
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 
@@ -31,22 +39,6 @@ void MessageCallback(GLenum source,
         (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
         type, severity, message);
     
-}
-
-void writeMap(float* map) {
-
-    std::ofstream mapFileStream;
-    mapFileStream.open("./map.csv");
-
-    for (int id = 0; id < WIDTH * HEIGHT;id++) {
-
-        mapFileStream << map[id] << ",";
-        if ((id + 1) % WIDTH == 0)mapFileStream << std::endl;
-
-    }
-
-    mapFileStream.close();
-
 }
 
 void processInput(GLFWwindow* window) {
@@ -174,8 +166,14 @@ int main()
     computeProgram.setInt("WIDTH", WIDTH);
     computeProgram.setInt("HEIGHT", HEIGHT);
 
+    decayShader.use();
+    decayShader.setFloat("decayRate", 0.01f);
+    
     //render loop
     while (!glfwWindowShouldClose(window)) {
+
+        
+        
         if (glfwGetTime() - time > 1/ FRAME_RATE) {
 
             time = glfwGetTime();
@@ -184,7 +182,7 @@ int main()
             processInput(window);
 
             //rendering stuff
-            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
             shaderProgram.use();
@@ -205,18 +203,17 @@ int main()
             decayShader.use();
             glDispatchCompute(WIDTH*HEIGHT/100, 1, 1);
             
+            
         }
 
         
-        
-
          //check calls and swap buffers
         glfwPollEvents();
     }
    
-
-	writeMap(map);
     glGetBufferSubData(GL_SHADER_STORAGE_BUFFER, NULL, WIDTH* HEIGHT * sizeof(float), map);
+    saveAsImg(map, WIDTH, HEIGHT, 0);
+    
     glfwTerminate();
     return 0;
 }

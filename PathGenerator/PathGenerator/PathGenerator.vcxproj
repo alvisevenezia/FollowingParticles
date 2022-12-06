@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="PathGenerator.cpp" />
+    <ClCompile Include="track.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\SFML\Audio.hpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="includes\GLFW\glfw3.h" />
     <ClInclude Include="includes\GLFW\glfw3native.h" />
     <ClInclude Include="includes\KHR\khrplatform.h" />
+    <ClInclude Include="track.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="includes\SFML\Audio\SoundFileFactory.inl" />
