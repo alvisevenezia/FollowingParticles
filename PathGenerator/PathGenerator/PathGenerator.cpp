@@ -11,14 +11,15 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 #define FRAME_RATE 120
-#define NUMBER 1024*1024
+#define NUMBER 1024*1024*3
 #define WORK_GROUP_SIZE 1024
 
-enum {
+enum genType {
 
     random,
-    mididle_in_circle,
-    mididle_in_square
+    middle_in_circle,
+    middle_in_square,
+    middle_in_triangle
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -100,17 +101,36 @@ int main()
 
     auto start = std::chrono::system_clock::now();
     float radius = 400.0f;
+    
+    genType type = random;
 
     for (int i = 0; i < NUMBER; i++) {
 
-        float x = float(rand() % WIDTH);
-        float y = float(rand() % HEIGHT);
+        int x = float(rand() % WIDTH);
+        int y = float(rand() % HEIGHT);
+        
+        if (type == middle_in_circle) {
 
-        while (powf(x - (WIDTH / 2), 2.0f) + powf(y - (HEIGHT / 2), 2.0f) > powf(radius, 2.0f) || (x == WIDTH/2 || y == HEIGHT/2)) {
-            x = float(rand() % WIDTH);
-            y = float(rand() % HEIGHT);
+            while (powf(x - (WIDTH / 2), 2.0f) + powf(y - (HEIGHT / 2), 2.0f) > powf(radius, 2.0f) || (x == WIDTH / 2 || y == HEIGHT / 2)) {
+                x = float(rand() % WIDTH);
+                y = float(rand() % HEIGHT);
+            }
+            
         }
-
+		else if (type == middle_in_square) {
+			while (x < WIDTH / 2 - radius || x > WIDTH / 2 + radius || y < HEIGHT / 2 - radius || y > HEIGHT / 2 + radius) {
+				x = float(rand() % WIDTH);
+				y = float(rand() % HEIGHT);
+			}
+		}
+		else if (type == middle_in_triangle) {
+			while (!((y > HEIGHT/2 - 250) && 1.5 * (x - WIDTH / 2 + 500) > y && -1.5 *(x-WIDTH/2 - 500) > y)) {
+				x = float(rand() % WIDTH);
+				y = float(rand() % HEIGHT);
+			}
+		}
+        
+        
         particles[i * 3] = x;
         particles[i * 3 + 1] = y;
 
