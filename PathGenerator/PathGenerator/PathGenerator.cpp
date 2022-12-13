@@ -19,7 +19,8 @@ enum genType {
     random,
     middle_in_circle,
     middle_in_square,
-    middle_in_triangle
+    middle_in_triangle,
+    middle_in_donut
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -102,7 +103,7 @@ int main()
     auto start = std::chrono::system_clock::now();
     float radius = 400.0f;
     
-    genType type = random;
+	genType type = middle_in_donut;
 
     for (int i = 0; i < NUMBER; i++) {
 
@@ -128,7 +129,17 @@ int main()
 				x = float(rand() % WIDTH);
 				y = float(rand() % HEIGHT);
 			}
-		}
+        }
+        else if (type == middle_in_donut) {
+
+            while (powf(x - (WIDTH / 2), 2.0f) + powf(y - (HEIGHT / 2), 2.0f) > powf(radius, 2.0f) || (x == WIDTH / 2 || y == HEIGHT / 2)
+                ||
+                powf(x - (WIDTH / 2), 2.0f) + powf(y - (HEIGHT / 2), 2.0f) < powf((radius - 100), 2.0f) || (x == WIDTH / 2 || y == HEIGHT / 2)) {
+                x = float(rand() % WIDTH);
+                y = float(rand() % HEIGHT);
+            }
+
+        }
         
         
         particles[i * 3] = x;
@@ -208,6 +219,13 @@ int main()
             shaderProgram.use();
             shaderProgram.setInt("WIDTH", WIDTH);
             shaderProgram.setInt("HEIGHT", HEIGHT);
+            
+			//make color change with time
+			float red = sin(glfwGetTime()) / 2.0f + 0.5f;
+			float green = sin(glfwGetTime() + 2.0f) / 2.0f + 0.5f;
+			float blue = sin(glfwGetTime() + 4.0f) / 2.0f + 0.5f;
+            
+			shaderProgram.set4Float("ourColor", red, 0.5f, 0.5f, 1.0f);
 
             glBindVertexArray(VAO);
             glDrawArrays(GL_POINTS,0, NUMBER);
