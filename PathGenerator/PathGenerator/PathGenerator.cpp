@@ -103,7 +103,7 @@ int main()
     auto start = std::chrono::system_clock::now();
     float radius = 400.0f;
     
-	genType type = middle_in_donut;
+	genType type = middle_in_triangle;
 
     for (int i = 0; i < NUMBER; i++) {
 
@@ -219,13 +219,6 @@ int main()
             shaderProgram.use();
             shaderProgram.setInt("WIDTH", WIDTH);
             shaderProgram.setInt("HEIGHT", HEIGHT);
-            
-			//make color change with time
-			float red = sin(glfwGetTime()) / 2.0f + 0.5f;
-			float green = sin(glfwGetTime() + 2.0f) / 2.0f + 0.5f;
-			float blue = sin(glfwGetTime() + 4.0f) / 2.0f + 0.5f;
-            
-			shaderProgram.set4Float("ourColor", red, 0.5f, 0.5f, 1.0f);
 
             glBindVertexArray(VAO);
             glDrawArrays(GL_POINTS,0, NUMBER);
