@@ -143,9 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="spawnUtils.h" />
+    <ClInclude Include="src\opengl\openglUtils.h" />
     <ClInclude Include="src\shader.h" />
-    <ClInclude Include="src\track.h" />
+    <ClInclude Include="src\utils\spawnUtils.h" />
+    <ClInclude Include="src\utils\track.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compute_shader.glsl" />
@@ -154,10 +155,11 @@
     <None Include="shaders\map_update_shader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="spawnUtils.cpp" />
     <ClCompile Include="src\FollowingParticules.cpp" />
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\track.cpp" />
+    <ClCompile Include="src\opengl\openglUtils.cpp" />
+    <ClCompile Include="src\utils\spawnUtils.cpp" />
+    <ClCompile Include="src\utils\track.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

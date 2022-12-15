@@ -22,16 +22,22 @@
     <Filter Include="Source Files\src\utils">
       <UniqueIdentifier>{fd48f914-336d-4b4e-ac0a-79ef3a5e2ed2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\opengl">
+      <UniqueIdentifier>{edc87dc1-4d91-4a29-b7b5-a3ae2e2accda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\track.h">
+    <ClInclude Include="src\utils\spawnUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="spawnUtils.h">
+    <ClInclude Include="src\utils\track.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opengl\openglUtils.h">
+      <Filter>Source Files\src\opengl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -55,11 +61,14 @@
     <ClCompile Include="src\glad.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\track.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="spawnUtils.cpp">
+    <ClCompile Include="src\utils\spawnUtils.cpp">
       <Filter>Source Files\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\track.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\opengl\openglUtils.cpp">
+      <Filter>Source Files\src\opengl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
