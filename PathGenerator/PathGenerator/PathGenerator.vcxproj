@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\opengl\openglUtils.h" />
-    <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\utils\shader.h" />
     <ClInclude Include="src\utils\spawnUtils.h" />
     <ClInclude Include="src\utils\track.h" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 // PathGenerator.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
-#include "shader.h"
+#include "utils/shader.h"
 #include "utils/track.h"
 #include "utils/spawnUtils.h"
 #include "opengl/openglUtils.h"
@@ -29,7 +29,7 @@ int main()
     float* map = (float*)calloc(WIDTH * HEIGHT,sizeof(float));
 
     srand(time(NULL));
-    spawnParticle(particles, middle_in_donut, NUMBER,HEIGHT,WIDTH);
+    spawnParticle(particles, middle_in_triangle, NUMBER,HEIGHT,WIDTH);
 
 
     unsigned int VBO,VAO,mapBuffer;

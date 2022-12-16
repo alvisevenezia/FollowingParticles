@@ -16,3 +16,7 @@ enum genType {
 };
 
 int spawnParticle(float* particulesArray, genType spawnType, int particuleQuantity, int height, int width);
+
+int spawnParticule_in_circle(float* particulesArray,int arrayIndex, int particuleQuantity, int x, int y, int radius);
+
+int spawnParticule_in_triangle(float* particulesArray, int arrayIndex, int particuleQuantity, int x, int y, int height);
