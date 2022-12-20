@@ -25,6 +25,9 @@
     <Filter Include="Source Files\src\opengl">
       <UniqueIdentifier>{edc87dc1-4d91-4a29-b7b5-a3ae2e2accda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\gui">
+      <UniqueIdentifier>{38feabaa-7176-40b9-8699-688cda6ba9b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\utils\spawnUtils.h">
@@ -33,10 +36,13 @@
     <ClInclude Include="src\utils\track.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl\openglUtils.h">
-      <Filter>Source Files\src\opengl</Filter>
-    </ClInclude>
     <ClInclude Include="src\utils\shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\DrawableShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\opengl\openglUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -51,6 +57,9 @@
       <Filter>Source Files\shaders</Filter>
     </None>
     <None Include="shaders\map_update_shader.glsl">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\basic_vertex_shader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
   </ItemGroup>
@@ -69,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="src\utils\track.cpp">
       <Filter>Source Files\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\DrawableShape.cpp">
+      <Filter>Source Files\src\gui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

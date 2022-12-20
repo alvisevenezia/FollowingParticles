@@ -143,12 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\gui\DrawableShape.h" />
     <ClInclude Include="src\opengl\openglUtils.h" />
     <ClInclude Include="src\utils\shader.h" />
     <ClInclude Include="src\utils\spawnUtils.h" />
     <ClInclude Include="src\utils\track.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\basic_vertex_shader.glsl" />
     <None Include="shaders\compute_shader.glsl" />
     <None Include="shaders\decayShader.glsl" />
     <None Include="shaders\fragment_shader.glsl" />
@@ -157,6 +159,7 @@
   <ItemGroup>
     <ClCompile Include="src\FollowingParticules.cpp" />
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\gui\DrawableShape.cpp" />
     <ClCompile Include="src\opengl\openglUtils.cpp" />
     <ClCompile Include="src\utils\spawnUtils.cpp" />
     <ClCompile Include="src\utils\track.cpp" />

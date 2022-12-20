@@ -15,6 +15,19 @@
 
 int main()
 {
+
+    float vertices[] = {
+		// positions          // colors
+		200,  200, 0.0f,  // top left
+		 200,  1000, 0.0f,  // top right
+		 1000, 200, 0.0f,  // bottom right
+		1000, 1000, 0.0f   // bottom left
+	};
+
+    unsigned int indices[] = {  // note that we start from 0!
+        0, 1, 3,   // first Triangle
+        1, 2, 3    // second Triangle
+    };
   
 	GLFWwindow* window = initGLProcess(4, 3,WIDTH,HEIGHT);
 
@@ -29,7 +42,7 @@ int main()
     float* map = (float*)calloc(WIDTH * HEIGHT,sizeof(float));
 
     srand(time(NULL));
-    spawnParticle(particles, middle_in_triangle, NUMBER,HEIGHT,WIDTH);
+    spawnParticle(particles, middle_in_circle, NUMBER,HEIGHT,WIDTH);
 
 
     unsigned int VBO,VAO,mapBuffer;
@@ -50,7 +63,7 @@ int main()
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
-    
+
     double time = glfwGetTime();
     
     shaderProgram.use();
@@ -90,14 +103,14 @@ int main()
             glDrawArrays(GL_POINTS,0, NUMBER);
 
             glfwSwapBuffers(window);
-
+            
             computeProgram.use();
-            glBindVertexArray(VAO);
             glDispatchCompute(workGroup, 1, 1);
 
             decayShader.use();
             glDispatchCompute(WIDTH*HEIGHT/100, 1, 1);
             
+
             
         }
 
