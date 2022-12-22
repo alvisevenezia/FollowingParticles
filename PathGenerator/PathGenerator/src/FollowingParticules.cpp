@@ -5,6 +5,7 @@
 #include "utils/track.h"
 #include "utils/spawnUtils.h"
 #include "opengl/openglUtils.h"
+#include "gui/shape/Square.h"
 
 #define WIDTH 1920
 #define HEIGHT 1080
@@ -15,19 +16,6 @@
 
 int main()
 {
-
-    float vertices[] = {
-		// positions          // colors
-		200,  200, 0.0f,  // top left
-		 200,  1000, 0.0f,  // top right
-		 1000, 200, 0.0f,  // bottom right
-		1000, 1000, 0.0f   // bottom left
-	};
-
-    unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 3,   // first Triangle
-        1, 2, 3    // second Triangle
-    };
   
 	GLFWwindow* window = initGLProcess(4, 3,WIDTH,HEIGHT);
 
@@ -36,6 +24,7 @@ int main()
     Shader shaderProgram("./shaders/basic_vertex_shader.glsl", "./shaders/fragment_shader.glsl");
     Shader computeProgram("./shaders/compute_shader.glsl");
     Shader decayShader("./shaders/map_update_shader.glsl");
+    Shader program = Shader("./shaders/square_vertex_shader.glsl", "./shaders/square_fragment_shader.glsl");
 	
     int workGroup = NUMBER/WORK_GROUP_SIZE;
     float* particles = (float*)calloc(NUMBER * 3, sizeof(float));
@@ -82,10 +71,14 @@ int main()
     decayShader.use();
     decayShader.setFloat("decayRate", 0.01f);
     
+    DrawableColor squareColor(0.2, 0.2, 1.0);
+
+	Square square(WIDTH/2, HEIGHT/2, 250, 500,squareColor,window);
+    square.initialize();
+    
     //render loop
     while (!glfwWindowShouldClose(window)) {
 
-        
         
         if (glfwGetTime() - time > 1/ FRAME_RATE) {
 
@@ -101,7 +94,10 @@ int main()
             shaderProgram.use();
             glBindVertexArray(VAO);
             glDrawArrays(GL_POINTS,0, NUMBER);
-
+            
+            
+			square.drawShape(WIDTH,HEIGHT);
+            
             glfwSwapBuffers(window);
             
             computeProgram.use();

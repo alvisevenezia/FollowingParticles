@@ -58,11 +58,11 @@ public:
 		ID = glCreateProgram();
 		glAttachShader(ID, compute);
 		glLinkProgram(ID);
-		glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
+		glGetProgramiv(ID, GL_LINK_STATUS, &success);
 
 		if (!success) {
 
-			glGetShaderInfoLog(ID, 512, NULL, infoLog);
+			glGetProgramInfoLog(ID, 512, NULL, infoLog);
 			std::cout << "ERROR::COMPUTE_PROGRAMM::LINKING_FAILED\n" << infoLog << std::endl;
 
 		}
@@ -137,11 +137,11 @@ public:
 		glAttachShader(ID, vertex);
 		glAttachShader(ID, fragment);
 		glLinkProgram(ID);
-		glGetShaderiv(ID, GL_COMPILE_STATUS, &succes);
+		glGetProgramiv(ID, GL_LINK_STATUS, &succes);
 
 		if (!succes) {
 
-			glGetShaderInfoLog(ID, 512, NULL, infoLog);
+			glGetProgramInfoLog(ID, 512, NULL, infoLog);
 			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
 
 		}

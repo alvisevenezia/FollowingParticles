@@ -22,11 +22,20 @@
     <Filter Include="Source Files\src\utils">
       <UniqueIdentifier>{fd48f914-336d-4b4e-ac0a-79ef3a5e2ed2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\gui">
+      <UniqueIdentifier>{38feabaa-7176-40b9-8699-688cda6ba9b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\gui\Shape">
+      <UniqueIdentifier>{e037b79d-5232-4f92-bfe4-0f3e0e36b2d6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\src\opengl">
       <UniqueIdentifier>{edc87dc1-4d91-4a29-b7b5-a3ae2e2accda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\gui">
-      <UniqueIdentifier>{38feabaa-7176-40b9-8699-688cda6ba9b0}</UniqueIdentifier>
+    <Filter Include="Source Files\src\gui\Controler">
+      <UniqueIdentifier>{91dd97e6-1f5d-47ab-99ca-b02fec711ee3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\gui\Element">
+      <UniqueIdentifier>{41acb30d-0ad3-44d4-b2dd-dc76e2d27d94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,11 +48,29 @@
     <ClInclude Include="src\utils\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui\DrawableShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\opengl\openglUtils.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\controler\Controler.h">
+      <Filter>Source Files\src\gui\Controler</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\shape\DrawableShape.h">
+      <Filter>Source Files\src\gui\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\shape\Square.h">
+      <Filter>Source Files\src\gui\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\element\Element.h">
+      <Filter>Source Files\src\gui\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\DrawableColor.h">
+      <Filter>Source Files\src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\View.h">
+      <Filter>Source Files\src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Compare.h">
+      <Filter>Source Files\src\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +87,12 @@
       <Filter>Source Files\shaders</Filter>
     </None>
     <None Include="shaders\basic_vertex_shader.glsl">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\square_fragment_shader.glsl">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\square_vertex_shader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
   </ItemGroup>
@@ -79,8 +112,14 @@
     <ClCompile Include="src\utils\track.cpp">
       <Filter>Source Files\src\utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\gui\DrawableShape.cpp">
-      <Filter>Source Files\src\gui</Filter>
+    <ClCompile Include="src\gui\controler\ButtonControler.h">
+      <Filter>Source Files\src\gui\Controler</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\shape\DrawableShape.cpp">
+      <Filter>Source Files\src\gui\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\shape\Square.cpp">
+      <Filter>Source Files\src\gui\Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
