@@ -6,8 +6,10 @@
 #include "utils/spawnUtils.h"
 #include "opengl/openglUtils.h"
 #include "gui/shape/Square.h"
+#include "gui/shape/Circle.h"
 #include "gui/element/Button.h"
 #include "gui/View.h"
+
 
 #define WIDTH 1920
 #define HEIGHT 1080
@@ -80,18 +82,20 @@ int main()
     DrawableColor squareOverColor2(0.2, 0.2, 1.0);
 
     DrawableColor green(0.0, 1.0, 0.0);
+
+	
     
-	Button* button1 = new Button(WIDTH/2, HEIGHT/2, 250, 500, squareBaseColor1,window);
+	Button* button1 = new Button(WIDTH/2, HEIGHT/2, 250, 250, squareBaseColor1,window,CIRCLE);
     button1->setOverColor(squareOverColor1);
     button1->setClickColor(green);
 	
-    Button* button2 = new Button(WIDTH / 2, HEIGHT / 2, 120, 170, squareBaseColor2, window);
+    Button* button2 = new Button(WIDTH / 4, HEIGHT / 4, 120, 170, squareBaseColor2, window);
     button2->setOverColor(squareOverColor2);
 	button2->setClickColor(green);
 
 	View* view = new View(window);
     view->addElement(button1);
-	view->addElement(button2);
+    view->addElement(button2);
     
     double cursorPoxX = 0, cursurPosY = 0;
     int windowWidth,windowHeight;

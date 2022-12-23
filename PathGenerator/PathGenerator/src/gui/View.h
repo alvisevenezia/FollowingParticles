@@ -28,20 +28,43 @@ public:
 		
 		//if the cursor is over on of the element in the listElement
 		for (int id = 0; id < listElement.size(); id++) {
-			if (cursorPosX >= listElement[id]->x - (listElement[id]->width / 2) && 
-				cursorPosX <= listElement[id]->x + (listElement[id]->width / 2) && 
-				cursorPosY >= listElement[id]->y - (listElement[id]->height / 2) && 
-				cursorPosY <= listElement[id]->y + (listElement[id]->height / 2)) {
-				
-				//if the current element is smaller that overedElement
-				if (overedElement == nullptr || listElement[id]->depth >= overedElement->depth) {
-					overedElement = listElement[id];
+
+			if (listElement[id]->type == SQUARE) {
+
+				if (cursorPosX >= listElement[id]->x - (listElement[id]->width / 2) &&
+					cursorPosX <= listElement[id]->x + (listElement[id]->width / 2) &&
+					cursorPosY >= listElement[id]->y - (listElement[id]->height / 2) &&
+					cursorPosY <= listElement[id]->y + (listElement[id]->height / 2)) {
+
+					//check if the current element is smaller that overedElement
+					if (overedElement == nullptr || listElement[id]->depth >= overedElement->depth) {
+						overedElement = listElement[id];
+					}
+					
+					
+				}else {
+					listElement[id]->resetColor();
 				}
 				
 			}
-			else {
-				listElement[id]->resetColor();
-			}
+			else if (listElement[id]->type == CIRCLE) {
+
+
+				//check if the cursor is in a circle with the center in the element position and radius = element width
+				if (sqrt(pow(cursorPosX - listElement[id]->x, 2) + pow(cursorPosY - listElement[id]->y, 2)) <= listElement[id]->width) {
+
+					
+
+					//check if the current element is smaller that overedElement
+					if (overedElement == nullptr || listElement[id]->depth >= overedElement->depth) {
+						overedElement = listElement[id];
+					}
+				}
+				else {
+					listElement[id]->resetColor();
+				}
+
+			}	
 			
 		}
 

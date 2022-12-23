@@ -1,11 +1,7 @@
 #pragma once
 #include "../DrawableColor.h"
 #include "../shape/DrawableShape.h"
-#include "../controler/Controler.h"
-#include "../../utils/Compare.h"
-#include <queue>
 #include <vector>
-#include <functional>
 
 class Element {
 
@@ -14,11 +10,14 @@ public:
 
 	int x, y, height, width;
 	int priority, depth;
+	ShapeType type;
 	DrawableColor baseColor,overColor,clickColor,currentColor;
 	std::vector<DrawableShape*> shapeList;
 	std::vector<Element> children;
 	
-	Element(int x, int y, int height, int width, DrawableColor baseColor) :x(x), y(y), height(height), width(width), depth(0), priority(0), baseColor(baseColor), overColor(baseColor), clickColor(baseColor),currentColor(baseColor){}
+	Element(int x, int y, int height, int width, DrawableColor baseColor,ShapeType type = SQUARE) :x(x), y(y), height(height), width(width), depth(0), priority(0), baseColor(baseColor), overColor(baseColor), clickColor(baseColor),currentColor(baseColor){
+		this->type = type;
+	}
 	virtual ~Element(){}
 
 	int setBaseColor(DrawableColor baseColor) {

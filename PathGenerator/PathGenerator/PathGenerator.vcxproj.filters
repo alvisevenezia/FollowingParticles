@@ -31,9 +31,6 @@
     <Filter Include="Source Files\src\opengl">
       <UniqueIdentifier>{edc87dc1-4d91-4a29-b7b5-a3ae2e2accda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\gui\Controler">
-      <UniqueIdentifier>{91dd97e6-1f5d-47ab-99ca-b02fec711ee3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\src\gui\Element">
       <UniqueIdentifier>{41acb30d-0ad3-44d4-b2dd-dc76e2d27d94}</UniqueIdentifier>
     </Filter>
@@ -51,9 +48,6 @@
     <ClInclude Include="src\opengl\openglUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui\controler\Controler.h">
-      <Filter>Source Files\src\gui\Controler</Filter>
-    </ClInclude>
     <ClInclude Include="src\gui\shape\DrawableShape.h">
       <Filter>Source Files\src\gui\Shape</Filter>
     </ClInclude>
@@ -69,14 +63,14 @@
     <ClInclude Include="src\gui\View.h">
       <Filter>Source Files\src\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\utils\Compare.h">
-      <Filter>Source Files\src\utils</Filter>
-    </ClInclude>
     <ClInclude Include="src\gui\Camera.h">
       <Filter>Source Files\src\gui</Filter>
     </ClInclude>
     <ClInclude Include="src\gui\element\Button.h">
       <Filter>Source Files\src\gui\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\shape\Circle.h">
+      <Filter>Source Files\src\gui\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -117,9 +111,6 @@
     </ClCompile>
     <ClCompile Include="src\utils\track.cpp">
       <Filter>Source Files\src\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\controler\ButtonControler.h">
-      <Filter>Source Files\src\gui\Controler</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

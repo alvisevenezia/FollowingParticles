@@ -4,10 +4,20 @@
 #include "../../utils/shader.h"
 #include "../DrawableColor.h"
 
+enum ShapeType {
+	SQUARE,
+	CIRCLE,
+	TRIANGLE,
+	LINE,
+	TEXT
+};
+
 class DrawableShape
 {
 	
 public:
+
+	
 
 	int x, y, height, width;
 	DrawableColor color;
