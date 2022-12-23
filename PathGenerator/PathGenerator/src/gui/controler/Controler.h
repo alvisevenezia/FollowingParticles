@@ -1,5 +1,5 @@
 class Controler {
 
-	int virtual onClick();
+	int virtual onClick() = 0;
 	
 };

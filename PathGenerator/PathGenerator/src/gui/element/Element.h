@@ -5,6 +5,7 @@
 #include "../../utils/Compare.h"
 #include <queue>
 #include <vector>
+#include <functional>
 
 class Element {
 
@@ -13,27 +14,84 @@ public:
 
 	int x, y, height, width;
 	int priority, depth;
-	DrawableColor color;
-	std::vector<DrawableShape> shapeList;
+	DrawableColor baseColor,overColor,clickColor,currentColor;
+	std::vector<DrawableShape*> shapeList;
 	std::vector<Element> children;
 	
-	Element(int x, int y, int height, int width);
+	Element(int x, int y, int height, int width, DrawableColor baseColor) :x(x), y(y), height(height), width(width), depth(0), priority(0), baseColor(baseColor), overColor(baseColor), clickColor(baseColor),currentColor(baseColor){}
+	virtual ~Element(){}
 
-	~Element();
+	int setBaseColor(DrawableColor baseColor) {
 
-	int setControler(Controler* controler);
-	
-	int addShape(DrawableShape shape);
+		this->baseColor = baseColor;
+		return 0;
+	}
 
-	int removeShape(DrawableShape shape);
+	int setOverColor(DrawableColor overColor) {
 
-	int addElement(Element element);
-	
-	int removeElement(Element element);
+		this->overColor = overColor;
+		return 0;
+	}
 
-	int drawElement();
+	int setClickColor(DrawableColor clickColor) {
 
-	int resizeElement(int width, int height);
+		this->clickColor = clickColor;
+		return 0;
+	}
 
-	int moveElement(int x, int y);
+	int addShape(DrawableShape* shape) {
+
+		shapeList.push_back(shape);
+		return 0;
+
+	}
+
+	int drawElement(int height, int width) {
+
+		for (DrawableShape* shape : shapeList) {
+			shape->drawShape(width, height);
+		}
+
+		for (int id = 0; id < children.size(); id++) {
+			children[id].drawElement(width, height);
+		}
+		
+		return 0;
+
+	}
+
+	int resizeElement(int width, int height) {
+
+		this->width = width;
+		this->height = height;
+		
+		for (int id = 0; id < children.size(); id++) {
+			children[id].resizeElement(std::min(width, children[id].width), std::min(height, children[id].height));
+		}
+
+	}
+
+	int moveElement(int x, int y) {
+
+		this->x = x;
+		this->y = y;
+
+	}
+
+	virtual int onClick(int cursorPosX, int cursorPosY) = 0;
+
+	virtual int onOver(int cursorPosX, int cursorPosY) = 0;
+
+	int resetColor() {
+
+		for (DrawableShape* shape : shapeList) {
+			shape->color = baseColor;
+		}
+
+		for (int id = 0; id < children.size(); id++) {
+			children[id].resetColor();
+		}
+
+		return 0;
+	}
 };

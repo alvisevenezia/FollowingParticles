@@ -72,6 +72,12 @@
     <ClInclude Include="src\utils\Compare.h">
       <Filter>Source Files\src\utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\gui\Camera.h">
+      <Filter>Source Files\src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\element\Button.h">
+      <Filter>Source Files\src\gui\Element</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\fragment_shader.glsl">
@@ -114,12 +120,6 @@
     </ClCompile>
     <ClCompile Include="src\gui\controler\ButtonControler.h">
       <Filter>Source Files\src\gui\Controler</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\shape\DrawableShape.cpp">
-      <Filter>Source Files\src\gui\Shape</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\shape\Square.cpp">
-      <Filter>Source Files\src\gui\Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,3 +1,4 @@
+#pragma once
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "../../utils/shader.h"
@@ -16,10 +17,25 @@ public:
 	Shader* program;
 	GLFWwindow* window;
 	
-	DrawableShape(int x, int y, int height, int width, DrawableColor color, GLFWwindow* window);
+	DrawableShape(int x, int y, int height, int width, DrawableColor color, GLFWwindow* window) : x(x), y(y), height(height), width(width), color(color), window(window){
+	
+		vbo = -1;
+		vao = -1;
+		ebo = -1;
+		program = nullptr;
+	}
 
-	int virtual drawShape(int width, int height);
+	int virtual drawShape(int width, int height) {
 
-	int virtual initialize();
+		return 0;
+
+	}
+
+	int virtual initialize() {
+
+		return 0;
+
+	}
+
 };
 

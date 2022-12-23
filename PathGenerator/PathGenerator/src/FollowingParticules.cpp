@@ -6,6 +6,8 @@
 #include "utils/spawnUtils.h"
 #include "opengl/openglUtils.h"
 #include "gui/shape/Square.h"
+#include "gui/element/Button.h"
+#include "gui/View.h"
 
 #define WIDTH 1920
 #define HEIGHT 1080
@@ -71,10 +73,28 @@ int main()
     decayShader.use();
     decayShader.setFloat("decayRate", 0.01f);
     
-    DrawableColor squareColor(0.2, 0.2, 1.0);
+    DrawableColor squareBaseColor1(0.2, 0.2, 1.0);
+    DrawableColor squareBaseColor2(0.4, 0.1, 0.8);
 
-	Square square(WIDTH/2, HEIGHT/2, 250, 500,squareColor,window);
-    square.initialize();
+    DrawableColor squareOverColor1(0.4, 0.1, 0.8);
+    DrawableColor squareOverColor2(0.2, 0.2, 1.0);
+
+    DrawableColor green(0.0, 1.0, 0.0);
+    
+	Button* button1 = new Button(WIDTH/2, HEIGHT/2, 250, 500, squareBaseColor1,window);
+    button1->setOverColor(squareOverColor1);
+    button1->setClickColor(green);
+	
+    Button* button2 = new Button(WIDTH / 2, HEIGHT / 2, 120, 170, squareBaseColor2, window);
+    button2->setOverColor(squareOverColor2);
+	button2->setClickColor(green);
+
+	View* view = new View(window);
+    view->addElement(button1);
+	view->addElement(button2);
+    
+    double cursorPoxX = 0, cursurPosY = 0;
+    int windowWidth,windowHeight;
     
     //render loop
     while (!glfwWindowShouldClose(window)) {
@@ -95,8 +115,11 @@ int main()
             glBindVertexArray(VAO);
             glDrawArrays(GL_POINTS,0, NUMBER);
             
-            
-			square.drawShape(WIDTH,HEIGHT);
+			glfwGetCursorPos(window, &cursorPoxX, &cursurPosY);
+            glfwGetWindowSize(window, &windowHeight, &windowWidth);
+
+            view->handleInteraction(cursorPoxX,HEIGHT-cursurPosY);
+            view->drawElement(HEIGHT, WIDTH);
             
             glfwSwapBuffers(window);
             

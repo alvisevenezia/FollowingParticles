@@ -143,8 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\gui\Camera.h" />
     <ClInclude Include="src\gui\controler\Controler.h" />
     <ClInclude Include="src\gui\DrawableColor.h" />
+    <ClInclude Include="src\gui\element\Button.h" />
     <ClInclude Include="src\gui\element\Element.h" />
     <ClInclude Include="src\gui\shape\DrawableShape.h" />
     <ClInclude Include="src\gui\shape\Square.h" />
@@ -168,8 +170,6 @@
     <ClCompile Include="src\FollowingParticules.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\gui\controler\ButtonControler.h" />
-    <ClCompile Include="src\gui\shape\DrawableShape.cpp" />
-    <ClCompile Include="src\gui\shape\Square.cpp" />
     <ClCompile Include="src\opengl\openglUtils.cpp" />
     <ClCompile Include="src\utils\spawnUtils.cpp" />
     <ClCompile Include="src\utils\track.cpp" />
