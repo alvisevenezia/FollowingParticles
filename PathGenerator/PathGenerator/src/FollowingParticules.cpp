@@ -14,7 +14,7 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 #define FRAME_RATE 120
-#define NUMBER 1024*1024*3
+#define NUMBER 1024*1024
 #define WORK_GROUP_SIZE 1024
 
 
@@ -35,7 +35,7 @@ int main()
     float* map = (float*)calloc(WIDTH * HEIGHT,sizeof(float));
 
     srand(time(NULL));
-    spawnParticle(particles, middle_in_circle, NUMBER,HEIGHT,WIDTH);
+    spawnParticle(particles, middle_in_donut, NUMBER,HEIGHT,WIDTH);
 
 
     unsigned int VBO,VAO,mapBuffer;
@@ -85,17 +85,17 @@ int main()
 
 	
     
-	Button* button1 = new Button(WIDTH/2, HEIGHT/2, 250, 250, squareBaseColor1,window,CIRCLE);
-    button1->setOverColor(squareOverColor1);
-    button1->setClickColor(green);
+	//Button* button1 = new Button(WIDTH/2, HEIGHT/2, 250, 250, squareBaseColor1,window,CIRCLE);
+    //button1->setOverColor(squareOverColor1);
+    //button1->setClickColor(green);
 	
-    Button* button2 = new Button(WIDTH / 4, HEIGHT / 4, 120, 170, squareBaseColor2, window);
-    button2->setOverColor(squareOverColor2);
-	button2->setClickColor(green);
-
-	View* view = new View(window);
-    view->addElement(button1);
-    view->addElement(button2);
+    //Button* button2 = new Button(WIDTH / 4, HEIGHT / 4, 120, 170, squareBaseColor2, window);//
+    //button2->setOverColor(squareOverColor2);
+	//button2->setClickColor(green);
+    
+	//View* view = new View(window);
+    //view->addElement(button1);
+    //view->addElement(button2);
     
     double cursorPoxX = 0, cursurPosY = 0;
     int windowWidth,windowHeight;
@@ -122,8 +122,8 @@ int main()
 			glfwGetCursorPos(window, &cursorPoxX, &cursurPosY);
             glfwGetWindowSize(window, &windowHeight, &windowWidth);
 
-            view->handleInteraction(cursorPoxX,HEIGHT-cursurPosY);
-            view->drawElement(HEIGHT, WIDTH);
+            //view->handleInteraction(cursorPoxX,HEIGHT-cursurPosY);
+            //view->drawElement(HEIGHT, WIDTH);
             
             glfwSwapBuffers(window);
             
@@ -132,8 +132,6 @@ int main()
 
             decayShader.use();
             glDispatchCompute(WIDTH*HEIGHT/100, 1, 1);
-            
-
             
         }
 
